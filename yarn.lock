@@ -316,6 +316,13 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+botmaster@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/botmaster/-/botmaster-3.1.1.tgz#9f29e5ea769225837d4c2c2a9e0c3b13153c512e"
+  dependencies:
+    debug "^2.6.6"
+    lodash "^4.17.4"
+
 brace-expansion@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.8.tgz#c07b211c7c952ec1f8efd51a77ef0d1d3990a292"
@@ -514,7 +521,7 @@ debug@2.2.0:
   dependencies:
     ms "0.7.1"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.6.3, debug@^2.6.8:
+debug@^2.1.1, debug@^2.2.0, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
