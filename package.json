@@ -1,0 +1,33 @@
+{
+  "name": "botmaster-zendesk",
+  "version": "0.1.0",
+  "description": "Botmaster plugin for Zendesk",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wearerobos/botmaster-zendesk"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "author": "Andre Mazoni <mazoni.andre@gmail.com",
+  "license": "MIT",
+  "keywords": [
+    "bot",
+    "botmaster",
+    "zendesk",
+    "bot-framework"
+  ],
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "jest": "^20.0.4"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  }
+}
