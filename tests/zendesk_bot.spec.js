@@ -43,16 +43,16 @@ describe('Zendesk Bot', () => {
 
   it('Formats the update that comes from the API', () => {
     const update = {
-      id: config.sampleUpdate().id,
+      ticket_id: config.sampleUpdate().id,
+      comment_id: 1234,
     };
 
     nock(myDomain)
-      .get(`/tickets/${update.id}/comments.json`)
-      .query({ sort_order: 'desc', per_page: 1 })
+      .get(`/tickets/${update.ticket_id}/comments.json`)
       .reply(200, config.sampleComments());
 
     nock(myDomain)
-      .get(`/tickets/${update.id}.json`)
+      .get(`/tickets/${update.ticket_id}.json`)
       .reply(200, config.sampleUpdate());
 
     const promise = bot.__formatUpdate(update);
