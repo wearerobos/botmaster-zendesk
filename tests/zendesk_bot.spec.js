@@ -40,11 +40,17 @@ describe('Zendesk Bot', () => {
   });
 
   it('__formatUpdate correctly formats the update that comes from the API', () => {
-    const update = config.sampleUpdate();
+    const update = {
+      id: config.sampleUpdate().id,
+    };
 
     nock('https://mydomain.zendesk.com/api/v2')
       .get(`/tickets/${update.id}/comments.json`)
       .reply(200, config.sampleAttachments());
+
+    nock('https://mydomain.zendesk.com/api/v2')
+      .get(`/tickets/${update.id}.json`)
+      .reply(200, config.sampleUpdate());
 
     const promise = bot.__formatUpdate(update);
     expect(promise).resolves.toMatchObject({
@@ -65,7 +71,7 @@ describe('Zendesk Bot', () => {
       attachments: [{
         type: 'image',
         payload: {
-          url: 'https://robos.zendesk.com/attachments/token/qj3xHCwPahyITjF5wt912W2ew/?name=image001.gif',
+          url: 'https://mydomain.zendesk.com/attachments/token/qj3xHCwPahyITjF5wt912W2ew/?name=image001.gif',
         },
       }, {
         type: 'file',
