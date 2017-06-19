@@ -27,12 +27,15 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "DEBUG=botmaster-zendesk jest",
+    "test:watch": "DEBUG=botmaster-zendesk jest --watch",
+    "test:coverage": "DEBUG=botmaster-zendesk jest --coverage"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "botmaster": "^3.1.1",
+    "debug": "^2.6.8",
+    "express": "^4.15.3",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   }

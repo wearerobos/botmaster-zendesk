@@ -12,12 +12,13 @@ describe('Zendesk Bot', () => {
   beforeEach(() => {
     bot = new ZendeskBot({
       credentials,
+      webhookEndpoint: 'webhook1234',
     });
   });
 
   it('Constructor instantiates bot with correct settings', () => {
     expect(bot.type).toEqual('zendesk');
-    expect(bot.requiresWebhook).toBe(false);
+    expect(bot.requiresWebhook).toBe(true);
     expect(bot.requiredCredentials).toMatchObject(['subdomain', 'email', 'token']);
 
     expect(bot.id).toEqual(config.credentials().subdomain);
@@ -47,7 +48,8 @@ describe('Zendesk Bot', () => {
 
     nock(myDomain)
       .get(`/tickets/${update.id}/comments.json`)
-      .reply(200, config.sampleAttachments());
+      .query({ sort_order: 'desc', per_page: 1 })
+      .reply(200, config.sampleComments());
 
     nock(myDomain)
       .get(`/tickets/${update.id}.json`)
