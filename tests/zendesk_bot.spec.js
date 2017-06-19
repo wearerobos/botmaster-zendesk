@@ -43,7 +43,7 @@ describe('Zendesk Bot', () => {
 
   it('Formats the update that comes from the API', () => {
     const update = {
-      ticket_id: config.sampleUpdate().id,
+      ticket_id: config.sampleUpdate().ticket.id,
       comment_id: 1234,
     };
 
@@ -57,7 +57,7 @@ describe('Zendesk Bot', () => {
 
     const promise = bot.__formatUpdate(update);
     expect(promise).resolves.toMatchObject({
-      raw: config.sampleUpdate(),
+      raw: config.sampleUpdate().ticket,
       sender: {
         id: 20978392,
       },
