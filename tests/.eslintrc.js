@@ -1,13 +1,13 @@
 module.exports = {
-  "extends": "airbnb-base",
-  "env": {
-    "node": true,
-    "jest": true,
+  'extends': 'airbnb-base',
+  'env': {
+    'node': true,
+    'jest': true,
   },
-  "plugins": [
-    "import",
+  'plugins': [
+    'import',
   ],
-  "rules": {
-    "no-underscore-dangle": "off"
+  'rules': {
+    'no-underscore-dangle': 'off'
   }
 };

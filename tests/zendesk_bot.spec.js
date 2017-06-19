@@ -39,7 +39,7 @@ describe('Zendesk Bot', () => {
     expect(bot.baseUrl).toEqual(`https://${credentials.subdomain}.zendesk.com/api/v2`);
   });
 
-  it('__formatUpdate correctly formats the update that comes from the API', () => {
+  it('__formatUpdate formats the update that comes from the API', () => {
     const update = {
       id: config.sampleUpdate().id,
     };
@@ -79,6 +79,25 @@ describe('Zendesk Bot', () => {
           url: 'https://mydomain.zendesk.com/attachments/token/KjzjWAsbu9tcMiv7ukIaF9yXX/?name=yarn.lock',
         },
       }],
+    });
+  });
+
+  it('__formatOutgoingMessage formats a text-only update to the format that Zendesk API requires', () => {
+    const update = {
+      sender: { id: 1234 },
+      recipient: { id: 35436 },
+      timestamp: 1497895333705,
+      message: {
+        text: 'Heyllo',
+      },
+    };
+    const outgoingMessage = bot.__formatOutgoingMessage(update);
+    expect(outgoingMessage).toMatchObject({
+      ticket: {
+        comment: {
+          body: 'Heyllo',
+        },
+      },
     });
   });
 });
