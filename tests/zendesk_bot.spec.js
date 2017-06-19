@@ -5,6 +5,7 @@ const config = require('./_config.js');
 
 describe('Zendesk Bot', () => {
   const credentials = config.credentials();
+  const myDomain = 'https://mydomain.zendesk.com/api/v2';
 
   let bot = null;
 
@@ -39,16 +40,16 @@ describe('Zendesk Bot', () => {
     expect(bot.baseUrl).toEqual(`https://${credentials.subdomain}.zendesk.com/api/v2`);
   });
 
-  it('__formatUpdate formats the update that comes from the API', () => {
+  it('Formats the update that comes from the API', () => {
     const update = {
       id: config.sampleUpdate().id,
     };
 
-    nock('https://mydomain.zendesk.com/api/v2')
+    nock(myDomain)
       .get(`/tickets/${update.id}/comments.json`)
       .reply(200, config.sampleAttachments());
 
-    nock('https://mydomain.zendesk.com/api/v2')
+    nock(myDomain)
       .get(`/tickets/${update.id}.json`)
       .reply(200, config.sampleUpdate());
 
@@ -82,7 +83,27 @@ describe('Zendesk Bot', () => {
     });
   });
 
-  it('__formatOutgoingMessage formats a text-only update to the format that Zendesk API requires', () => {
+  it('Formats a text-only update to the format that Zendesk API requires', () => {
+    const update = {
+      sender: { id: 1234 },
+      recipient: { id: 35436 },
+      timestamp: 1497895333705,
+      message: {
+        text: 'Heyllo',
+      },
+    };
+
+    const outgoingMessage = bot.__formatOutgoingMessage(update);
+    expect(outgoingMessage).toMatchObject({
+      ticket: {
+        comment: {
+          body: 'Heyllo',
+        },
+      },
+    });
+  });
+
+  it('Sends an OutgoingMessage to Zendesk', () => {
     const update = {
       sender: { id: 1234 },
       recipient: { id: 35436 },
@@ -92,12 +113,15 @@ describe('Zendesk Bot', () => {
       },
     };
     const outgoingMessage = bot.__formatOutgoingMessage(update);
-    expect(outgoingMessage).toMatchObject({
-      ticket: {
-        comment: {
-          body: 'Heyllo',
-        },
-      },
-    });
+
+    nock(myDomain)
+      .put(`/tickets/${update.recipient.id}.json`, outgoingMessage)
+      .delay(0)
+      .reply(200);
+    return bot
+      .__sendMessage(outgoingMessage)
+      .then(() => {
+        expect(nock.isDone()).toBe(true);
+      });
   });
 });
