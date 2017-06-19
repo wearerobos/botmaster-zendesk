@@ -67,9 +67,10 @@ describe('Zendesk Bot', () => {
       },
       timestamp: 1304591932000,
       message: {
+        // TODO: can we assume that mid will be the ticket id and seq the comment id?
         mid: 35436,
-        // TODO: define what should be here
-        seq: null,
+        seq: 1234,
+        text: 'The fire is very colorful.',
       },
       attachments: [{
         type: 'image',

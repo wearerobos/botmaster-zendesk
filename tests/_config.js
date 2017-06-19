@@ -55,6 +55,7 @@ module.exports = {
   sampleComments: () => ({
     comments: [{
       id: 1234,
+      body: 'The fire is very colorful.',
       attachments: [
         {
           url: 'https://mydomain.zendesk.com/api/v2/attachments/8233553527.json',
