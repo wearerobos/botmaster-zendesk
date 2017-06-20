@@ -62,8 +62,7 @@ describe('Zendesk Bot', () => {
         id: 20978392,
       },
       recipient: {
-        // TODO: define what should be here
-        id: null,
+        id: credentials.email,
       },
       timestamp: 1304591932000,
       message: {
@@ -121,10 +120,24 @@ describe('Zendesk Bot', () => {
       .put(`/tickets/${update.recipient.id}.json`, outgoingMessage)
       .delay(0)
       .reply(200);
+
     return bot
       .__sendMessage(outgoingMessage)
       .then(() => {
         expect(nock.isDone()).toBe(true);
       });
+  });
+
+  it('reply() calls sendTextMessageTo() passing the update\'s "mid", ie. the ticket id, as the recipient id', () => {
+    // here we overwrite the original function with a spied mock
+    bot.sendTextMessageTo = jest.fn();
+    const update = {
+      message: {
+        mid: 123,
+      },
+    };
+
+    bot.reply(update, 'hi');
+    expect(bot.sendTextMessageTo).toHaveBeenCalledWith('hi', 123, undefined);
   });
 });
