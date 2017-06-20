@@ -8,7 +8,10 @@
     "url": "https://github.com/wearerobos/botmaster-zendesk"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/wearerobos/botmaster-zendesk/issues"
+  },
+  "engines": {
+    "node": ">=4.x.x <8.0.0"
   },
   "author": "Andre Mazoni <mazoni.andre@gmail.com",
   "license": "MIT",
