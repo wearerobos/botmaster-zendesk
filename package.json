@@ -29,10 +29,11 @@
     "nock": "^9.0.13"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint ./lib && eslint ./test",
     "test": "DEBUG=botmaster-zendesk jest",
     "test:watch": "DEBUG=botmaster-zendesk jest --watch",
-    "test:coverage": "DEBUG=botmaster-zendesk jest --coverage"
+    "test:coverage": "DEBUG=botmaster-zendesk jest --coverage",
+    "prepublish": "yarn lint && yarn test"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
