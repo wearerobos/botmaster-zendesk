@@ -1,5 +1,5 @@
 {
-  "name": "botmaster-zendesk",
+  "name": "@wearerobos/botmaster-zendesk",
   "version": "0.1.0",
   "description": "Botmaster plugin for Zendesk",
   "main": "lib/index.js",
