@@ -9,11 +9,11 @@ Botmaster is a lightweight chatbot framework. Its purpose is to integrate your e
 Find the whole documentation for the framework on: [botmasterai.com/documentation/latest/](botmasterai.com/documentation/latest/)
 
 ### Installing
-`yarn add botmaster-zendesk`
+`yarn add @wearerobos/botmaster-zendesk`
 
 or
 
-`npm install --save botmaster-telegram`
+`npm install --save @wearerobos/botmaster-zendesk`
 
 ### Credentials and Webhook
 You will need to pass 3 credentials when you use the plugin: **subdomain**, **email** and **token**. You will also need to specify a **webhookEndpoint**, that is the URL to which Zendesk will send updates.
