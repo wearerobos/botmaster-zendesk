@@ -3,7 +3,6 @@ node_js:
   - "stable"
   - "8.0"
   - "6.0"
-  - "4.2"
 
 after_script:
   - yarn global add codeclimate-test-reporter
